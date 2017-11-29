@@ -15,6 +15,19 @@
   <link rel="stylesheet" type="text/css" href="style-admin.css">
 
 </head>
+<?php
+session_start();
+/**
+ * Jika Tidak login atau sudah login tapi bukan sebagai admin
+ * maka akan dibawa kembali kehalaman login atau menuju halaman yang seharusnya.
+ */
+if ( !isset($_SESSION['user_login']) || 
+  ( isset($_SESSION['user_login']) && $_SESSION['user_login'] != 'user' ) ) {
+
+  header('location:./../login.php');
+exit();
+}
+?>
 <body class="fixed-nav sticky-footer bg-primary" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top" id="mainNav">
@@ -57,6 +70,10 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item"> 
+          <i class="fa fa-fw fa-user"></i>
+          <span><?=$_SESSION['nama'];?></span>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-envelope"></i>
@@ -73,69 +90,69 @@
             <a class="dropdown-item small" href="#">View all messages</a>
           </div>
         </li>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-          <div class="content-wrapper">
-            <div class="container-fluid">
-              <!-- Breadcrumbs-->
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="#">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">Dashboard</li>
-              </ol>
-            </div>
-          </div>
-          <footer class="sticky-footer">
-            <div class="container">
-              <div class="text-center">
-                <small>Copyright © Konveksiku 2017</small>
-              </div>
-            </div>
-          </footer>
-          <!-- Scroll to Top Button-->
-          <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fa fa-angle-up"></i>
-          </a>
-          <!-- Logout Modal-->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModelLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="logoutModelLabel">Yakin Untuk Keluar?</h5>
-                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div class="modal-body">Pilih "Logout" Jika kamu ingin keluar. Pilih "Batal" jika tidak jadi keluar</div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                  <a class="btn btn-primary" href="login.php">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Bootstrap core JavaScript-->
-          <script src="vendor/jquery/jquery.min.js"></script>
-          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-          <!-- Core plugin JavaScript-->
-          <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-          <!-- Page level plugin JavaScript-->
-          <script src="vendor/chart.js/Chart.min.js"></script>
-          <script src="vendor/datatables/jquery.dataTables.js"></script>
-          <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-          <!-- Custom scripts for all pages-->
-          <script src="js/sb-admin.min.js"></script>
-          <!-- Custom scripts for this page-->
-          <script src="js/sb-admin-datatables.min.js"></script>
-          <script src="js/sb-admin-charts.min.js"></script>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
+          <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </div>
+  </div>
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © Konveksiku 2017</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="logoutModelLabel">Yakin Untuk Keluar?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
         </div>
-      </body>
+        <div class="modal-body">Pilih "Logout" Jika kamu ingin keluar. Pilih "Batal" jika tidak jadi keluar</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+          <a class="btn btn-primary" href="login.php">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin.min.js"></script>
+  <!-- Custom scripts for this page-->
+  <script src="js/sb-admin-datatables.min.js"></script>
+  <script src="js/sb-admin-charts.min.js"></script>
+</div>
+</body>
 
-      </html>
+</html>

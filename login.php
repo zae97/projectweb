@@ -37,23 +37,33 @@
   </div>
 </nav>  
 <section>
+      <?php
+    /* handle error */
+    if (isset($_GET['error'])) : ?>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Peringatan! </strong> <?=base64_decode($_GET['error']);?>
+        </div>
+    <?php endif;?>
  <div class="container">
   <div class="card card-login mx-auto mt-5">
     <div class="card-header" align="center">Login</div>
     <div class="card-body">
-      <form action="" method="POST">
+      <form action="check-login.php" class="inner-login" method="post">
         <div class="form-group">
           <label for="username">Username</label>
-          <input class="form-control" name="usr" type="text" placeholder="Masukkan Username">
+          <input class="form-control" name="username" type="text" placeholder="Masukkan Username">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input class="form-control" name="pass" id="password" type="password" placeholder="Masukkan Password">
+          <input class="form-control" name="password" id="password" type="password" placeholder="Masukkan Password">
         </div>
         <div class="form-group">
           <div class="form-check">
             <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" onclick="myFunction()"> Lihat Password</label>
+              <input class="form-check-input" type="checkbox" onclick="showPass()"> Lihat Password</label>
             </div>
           </div>
           <div class="form-group">
@@ -63,7 +73,7 @@
               </div>
             </div>
             <script>
-              function myFunction() {
+              function showPass() {
                 var x = document.getElementById("password");
                 if (x.type === "password") {
                   x.type = "text";
@@ -72,7 +82,7 @@
                 }
               }
             </script>
-            <a class="btn btn-light btn-block" name="login" >Login</a>
+            <input type="submit" class="btn btn-light btn-block" value="login"></a>
           </form>
         </div>
       </div>
